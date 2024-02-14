@@ -1,0 +1,52 @@
+package com.app.Service;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.app.Entity.QRCode;
+import com.app.Repo.QrRepo;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+
+import jakarta.transaction.Transactional;
+
+@Service
+public class QrServiceImpl implements QrService{
+	
+	@Autowired
+	private QrRepo qrRepo;
+
+	   @Transactional
+	    public QRCode generateAndSaveQRCode(String text) {
+	        try {
+	            // Generate QR code bytes
+	            byte[] qrCodeBytes = generateQRCodeBytes(text);
+
+	            // Save QR code entity
+	            QRCode qrCode = new QRCode();
+	            qrCode.setText(text);
+	            qrCode.setQrCode(qrCodeBytes);
+	            return qrRepo.save(qrCode);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	    }
+
+
+	   private byte[] generateQRCodeBytes(String text) throws WriterException, IOException {
+	        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+	        BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, 200, 200);
+	        MatrixToImageWriter.writeToStream(bitMatrix, "PNG", outputStream);
+	        return outputStream.toByteArray();
+	    }
+	
+	
+	
+}

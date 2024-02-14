@@ -1,0 +1,30 @@
+package com.app.dto;
+
+public class FindByName {
+	
+	private String firstName;
+
+	public FindByName() {
+		super();
+	}
+
+	public FindByName(String firstName) {
+		super();
+		this.firstName = firstName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	@Override
+	public String toString() {
+		return "FindByName [firstName=" + firstName + "]";
+	}
+	
+	
+}

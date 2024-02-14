@@ -1,0 +1,13 @@
+package com.app.repo;
+
+
+
+import org.springframework.stereotype.Repository;
+
+import com.app.entity.Student;
+
+@Repository
+public class StudentRepo extends JpaRepository<Student, Integer> {
+	Student findByEmail(String email);
+
+}
