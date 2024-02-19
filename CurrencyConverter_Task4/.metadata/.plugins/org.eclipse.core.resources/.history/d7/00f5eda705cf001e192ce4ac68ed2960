@@ -1,0 +1,44 @@
+package com.app.Controller;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController	
+@CrossOrigin
+@RequestMapping("/currency")
+public class CurrencyController {
+	
+	@GetMapping("/convert")
+    public double convertCurrency(@RequestParam String from, @RequestParam String to, @RequestParam double amount) {
+       if(from=="INR") {
+       switch(to) {
+       case"INR":
+    	   amount=amount;
+    	   break;
+       case"DOLLAR":
+    	   amount=amount/82;
+    	   break;
+    	   
+       }
+       }
+       else if(from=="DOLLAR")
+       {
+    	   switch(to) {
+    	   case"INR":
+    		   amount=amount*82;
+    		   break;
+    	   case"DOLLAR":
+    		   amount=amount;
+    		   break;
+    	   }
+       }
+       
+       return amount;
+       
+      
+    }
+
+}

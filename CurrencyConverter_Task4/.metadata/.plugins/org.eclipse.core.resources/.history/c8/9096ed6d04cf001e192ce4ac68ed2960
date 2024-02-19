@@ -1,0 +1,22 @@
+package com.app.Controller;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController	
+@CrossOrigin
+@RequestMapping("/currency")
+public class CurrencyController {
+	
+	@GetMapping("/convert")
+    public double convertCurrency(@RequestParam String from, @RequestParam String to, @RequestParam double amount) {
+        // Implement your currency conversion logic here
+        // For demonstration purposes, let's just assume a fixed conversion rate
+        double conversionRate = 0.85; // 1 USD = 0.85 EUR
+        return amount * conversionRate;
+    }
+
+}
