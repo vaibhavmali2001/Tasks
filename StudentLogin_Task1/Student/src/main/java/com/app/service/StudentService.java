@@ -17,6 +17,8 @@ public interface StudentService {
 
 	List<Student> byName(String firstName);
 
+	String removeStudent(Integer id);
+
 	
 
 	
