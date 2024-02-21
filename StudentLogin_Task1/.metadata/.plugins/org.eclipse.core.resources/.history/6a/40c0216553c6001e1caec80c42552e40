@@ -1,5 +1,0 @@
-package com.app.repo;
-
-public class StudentRepo extends JpaRepository<Student, Long> {
-    Student findByEmail(String email);
-}

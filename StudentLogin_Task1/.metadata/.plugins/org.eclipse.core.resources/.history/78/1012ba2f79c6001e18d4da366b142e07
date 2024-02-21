@@ -1,9 +1,0 @@
-package com.app.service;
-
-import com.app.dto.StudentDto;
-
-public interface StudentService {
-
-	String addStudent(StudentDto studentDto);
-
-}
