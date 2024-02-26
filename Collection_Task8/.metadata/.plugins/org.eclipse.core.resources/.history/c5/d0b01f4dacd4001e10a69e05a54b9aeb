@@ -1,0 +1,13 @@
+package com.Vector;
+
+public class Test {
+
+	public static void main(String[] args) {
+		Vector<String>vt=new Vector<>();
+		vt.add("A");
+		vt.add("B");
+		vt.add("C");
+		System.out.println(vt);
+	}
+
+}

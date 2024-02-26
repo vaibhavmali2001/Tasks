@@ -1,0 +1,73 @@
+package com.Vector;
+
+public class Vector <T>{
+	
+	  private Object[] array;
+	    private int size;
+	    private int defaultCapacity = 10;
+
+	    // Constructor
+	    public Vector() {
+	        array = new Object[defaultCapacity];
+	        size = 0;
+	    }
+
+	    // Method to add an element to the vector
+	    public synchronized void add(T element) {
+	        if (size == array.length) {
+	            // If the array is full, double its capacity
+	            ensureCapacity(size * 2);
+	        }
+	        array[size++] = element;
+	    }
+
+	    // Method to get an element at a specified index
+	    @SuppressWarnings("unchecked")
+	    public synchronized T get(int index) {
+	        if (index < 0 || index >= size) {
+	            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+	        }
+	        return (T) array[index];
+	    }
+
+	    // Method to remove an element at a specified index
+	    public synchronized void remove(int index) {
+	        if (index < 0 || index >= size) {
+	            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+	        }
+	        // Shift elements to the left
+	        for (int i = index; i < size - 1; i++) {
+	            array[i] = array[i + 1];
+	        }
+	        array[size - 1] = null; // Set the last element to null
+	        size--;
+	    }
+
+	    // Method to ensure the capacity of the vector
+	    private synchronized void ensureCapacity(int minCapacity) {
+	        int oldCapacity = array.length;
+	        if (minCapacity > oldCapacity) {
+	            Object[] newArray = new Object[Math.max(oldCapacity * 2, minCapacity)];
+	            System.arraycopy(array, 0, newArray, 0, size);
+	            array = newArray;
+	        }
+	    }
+
+	    // Method to get the size of the vector
+	    public synchronized int size() {
+	        return size;
+	    }
+
+	    // Method to check if the vector is empty
+	    public synchronized boolean isEmpty() {
+	        return size == 0;
+	    }
+
+	    // Method to print the vector
+	    public synchronized void print() {
+	        for (int i = 0; i < size; i++) {
+	            System.out.print(array[i] + " ");
+	        }
+	        System.out.println();
+	    }
+}
